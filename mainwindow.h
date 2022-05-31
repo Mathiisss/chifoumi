@@ -29,6 +29,9 @@ public slots:
     void jouerLeCiseau();
     void quitter();
     void aPropos();
+public:
+    bool arretPointGagnant(int);
+    void finDePartie();
 
 
 private:

@@ -31,6 +31,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::Partie()
 {
+
     ui->boutonCiseau->setEnabled(true);
     ui->boutonFeuille->setEnabled(true);
     ui->boutonPierre->setEnabled(true);
@@ -56,6 +57,16 @@ void MainWindow::jouerLeCiseau(){
     jeu();
 
 }
+bool MainWindow::arretPointGagnant(int point)
+{
+    if(point==5){
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 void MainWindow::jeu()
 {
@@ -77,24 +88,42 @@ void MainWindow::jeu()
     }
     if(monJeu.determinerGagnant()=='J')
     {
-        texteLabel=ui->scoreJoueur->text();
-        score=texteLabel.toInt();
-        score++;
+        monJeu.majScores('J');
+        score=monJeu.getScoreJoueur();
         texteLabel.setNum(score);
         ui->scoreJoueur->setText(texteLabel);
         ui->scoreJoueur->setFont(QFont("arial",18,100,false));
         ui->scoreJoueur->setAlignment(Qt::AlignCenter);
+        if(arretPointGagnant(monJeu.getScoreJoueur()))
+        {
+            QMessageBox *finPartieJoueur;
+            finPartieJoueur = new QMessageBox;
+            finPartieJoueur->setWindowTitle("Fin de Partie");
+            finPartieJoueur->setInformativeText("Felicitation vous remportez la partie!!!");
+            finPartieJoueur->exec();
+            finDePartie();
+        }
 
     }
     else if (monJeu.determinerGagnant()=='M')
     {
-        texteLabel=ui->scoreMachine->text();
-        score=texteLabel.toInt();
-        score++;
+        monJeu.majScores('M');
+        score=monJeu.getScoreMachine();
         texteLabel.setNum(score);
         ui->scoreMachine->setText(texteLabel);
         ui->scoreMachine->setFont(QFont("arial",18,100,false));
         ui->scoreMachine->setAlignment(Qt::AlignCenter);
+
+        if(arretPointGagnant(monJeu.getScoreMachine()))
+        {
+            QMessageBox *finPartieMachine;
+            finPartieMachine = new QMessageBox;
+            finPartieMachine->setWindowTitle("Fin de Partie");
+            finPartieMachine->setInformativeText("Dommage la Machine remporte la partie...");
+            finPartieMachine->exec();
+            finDePartie();
+        }
+
     }
     else
     {
@@ -117,4 +146,21 @@ void MainWindow::aPropos()
 
 
 
+}
+
+void MainWindow::finDePartie()
+{
+    QString texteLabel;
+    ui->boutonCiseau->setEnabled(false);
+    ui->boutonFeuille->setEnabled(false);
+    ui->boutonPierre->setEnabled(false);
+    monJeu.initCoups();
+    monJeu.initScores();
+    texteLabel.setNum(monJeu.getScoreMachine());
+    ui->scoreMachine->setText(texteLabel);
+    ui->scoreMachine->setFont(QFont("arial",18,100,false));
+    ui->scoreMachine->setAlignment(Qt::AlignCenter);
+    ui->scoreJoueur->setText(texteLabel);
+    ui->scoreJoueur->setFont(QFont("arial",18,100,false));
+    ui->scoreJoueur->setAlignment(Qt::AlignCenter);
 }
