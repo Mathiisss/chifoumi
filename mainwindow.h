@@ -27,6 +27,8 @@ public slots:
     void jouerLeCailloux();
     void jouerLaFeuille();
     void jouerLeCiseau();
+    void quitter();
+    void aPropos();
 
 
 private:

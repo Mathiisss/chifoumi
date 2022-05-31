@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -11,10 +12,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->boutonPierre,SIGNAL(clicked()),this,SLOT(jouerLeCailloux()));
     connect(ui->boutonFeuille,SIGNAL(clicked()),this,SLOT(jouerLaFeuille()));
     connect(ui->boutonCiseau,SIGNAL(clicked()),this,SLOT(jouerLeCiseau()));
+    connect(ui->actionQuitter,SIGNAL(triggered()),this,SLOT(quitter()));
+    connect(ui->actionA_propos_de,SIGNAL(triggered()),this,SLOT(aPropos()));
 
     pierre = new QPixmap(":/chifoumi/images/pierre.gif");
     ciseau = new QPixmap(":/chifoumi/images/ciseau.gif");
     feuille = new QPixmap(":/chifoumi/images/papier.gif");
+
+
 }
 
 MainWindow::~MainWindow()
@@ -95,4 +100,21 @@ void MainWindow::jeu()
     {
 
     }
+}
+void MainWindow::quitter()
+{
+    this->close();
+}
+void MainWindow::aPropos()
+{
+    QMessageBox *box;
+    box = new QMessageBox;
+    box->setWindowTitle("A propos du Chifoumi");
+    box->setInformativeText("CHIFOUMI v3 \n"
+                            "Date de création : 18/04/2022\n"
+                            "Créateur: G.Arricastres, M.Lague, M.Segot");
+    box->exec();
+
+
+
 }
