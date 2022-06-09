@@ -11,6 +11,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    goal=5;
     timer = new QTimer(this);
     timer->setInterval(1000);
     seconde = 30;
@@ -50,6 +51,7 @@ void chifoumiVue::Partie()
     ui->boutonFeuille->setEnabled(true);
     ui->boutonPierre->setEnabled(true);
     ui->bouttonPause->setEnabled(true);
+    ui->actionParametres->setEnabled(false);
     timer->start();
     time();
 
@@ -172,7 +174,7 @@ void chifoumiVue::aPropos()
 void chifoumiVue::finDePartie()
 {
     QString texteLabel;
-
+    loginBd.enregistrerDialog(chifoumiAff.getNom(),monJeu.getScoreJoueur(),monJeu.getScoreMachine(),(chifoumiAff.getTemps()-seconde));
     ui->boutonCiseau->setEnabled(false);
     ui->boutonFeuille->setEnabled(false);
     ui->boutonPierre->setEnabled(false);
@@ -196,6 +198,7 @@ void chifoumiVue::finDePartie()
     ui->labelGoal->setFont(QFont("Times",12,40,false));
     ui->labelGoal->setAlignment(Qt::AlignCenter);
     ui->labelGoal->setStyleSheet("color: #606060;");
+    ui->actionParametres->setEnabled(true);
 
 }
 

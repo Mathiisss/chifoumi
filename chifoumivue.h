@@ -5,6 +5,7 @@
 #include "QPixmap"
 #include "chifoumi.h"
 #include "chifoumidialog.h"
+#include "logindialog.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +29,7 @@ private:
     bool enPause = false;
     int goal;
     ChifoumiDialog chifoumiAff;
+    loginDialog loginBd;
 
 public slots:
     void Partie();

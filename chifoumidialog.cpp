@@ -17,13 +17,31 @@ ChifoumiDialog::~ChifoumiDialog()
 
 void ChifoumiDialog::Valider()
 {
-       nom = ui->nomResul->text();
-       QString temps = ui->tempsResul->text();
-       QString points = ui->pointsResul->text();
-       bool ok;
-       tempsChiffre = temps.toInt(&ok,10);
-       pointsChiffre= points.toInt(&ok,10);
-       this->close();
+    nom = ui->nomResul->text();
+    if(nom=="")
+    {
+        nom="Vous";
+    }
+    QString temps = ui->tempsResul->text();
+    QString points = ui->pointsResul->text();
+    bool ok;
+    if (points=="")
+    {
+        pointsChiffre=5;
+    }
+    else
+    {
+        pointsChiffre= points.toInt(&ok,10);
+    }
+    if (temps=="")
+    {
+        tempsChiffre=30;
+    }
+    else
+    {
+        tempsChiffre = temps.toInt(&ok,10);
+    }
+    this->close();
 
 }
 int ChifoumiDialog::getPoints() const
@@ -32,9 +50,20 @@ int ChifoumiDialog::getPoints() const
 }
 int ChifoumiDialog::getTemps() const
 {
+    if (tempsChiffre==0)
+    {
+        return 30;
+    }
     return tempsChiffre;
 }
 QString ChifoumiDialog::getNom() const
 {
-    return nom;
+    if(nom=="")
+    {
+        return "Vous";
+    }
+    else
+    {
+        return nom;
+    }
 }

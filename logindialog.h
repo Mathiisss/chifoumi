@@ -18,6 +18,7 @@ public:
     QString getLogin();
     QString getMdp();
     void setMdpFromBd();
+    void enregistrerDialog(QString,int,int,int);
 public slots:
     bool Valider();
     void Fermer();

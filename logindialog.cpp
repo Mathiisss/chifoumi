@@ -25,18 +25,15 @@ bool loginDialog::Valider()
     loginDialog wine;
     if(bd->openDataBase()==true)
     {
-        qDebug()<<"bite";
 
         setMdpFromBd();
         if(mdpBd==getMdp())
         {
-            qDebug()<<"bien prepare";
             return true;
 
         }
         if (mdpBd!=getMdp())
         {
-            qDebug()<<"bonjour";
             wine.show();
             wine.exec();
 
@@ -44,7 +41,6 @@ bool loginDialog::Valider()
     }
     else
     {
-        qDebug()<<"ERREUR DE CONNEXION";
         return false;
     }
     bd->closeDataBase();
@@ -77,11 +73,20 @@ void loginDialog::setMdpFromBd()
         requete.exec();
         while (requete.next())
         {
-            qDebug()<<"feur";
             mdpBd=requete.value(0).toString();
-            qDebug()<<mdpBd;
         }
     }
 
 
+}
+void loginDialog::enregistrerDialog(QString nomJoueur,int scoreJoueur,int scoreMachine, int dureePartie)
+{
+
+    QSqlQuery larequete;
+    larequete.prepare("INSERT INTO StockPartie(NomJoueur,ScoreJoueur,ScoreMachine,TempsPartie) VALUES (:nomJ, :scoreJ, :scoreM, :Temps)");
+    larequete.bindValue(":nomJ", nomJoueur);
+    larequete.bindValue(":scoreJ", scoreJoueur);
+    larequete.bindValue(":scoreM", scoreMachine);
+    larequete.bindValue(":Temps", dureePartie);
+    larequete.exec();
 }
