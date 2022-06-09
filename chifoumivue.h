@@ -6,6 +6,7 @@
 #include "chifoumi.h"
 #include "chifoumidialog.h"
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -27,6 +28,7 @@ private:
     bool enPause = false;
     int goal;
     ChifoumiDialog chifoumiAff;
+
 public slots:
     void Partie();
     void jeu();

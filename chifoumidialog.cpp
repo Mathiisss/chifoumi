@@ -20,17 +20,6 @@ void ChifoumiDialog::Valider()
        nom = ui->nomResul->text();
        QString temps = ui->tempsResul->text();
        QString points = ui->pointsResul->text();
-       while(temps<0 and points<0)
-       {
-           QMessageBox *finPartieMachine;
-           finPartieMachine = new QMessageBox;
-           finPartieMachine->setWindowTitle("Saisi incorrect");
-           finPartieMachine->setInformativeText("Le temps et le score doivent être supérieur à 0");
-           finPartieMachine->exec();
-           ui->tempsResul->text();
-           points = ui->pointsResul->text();
-       }
-
        bool ok;
        tempsChiffre = temps.toInt(&ok,10);
        pointsChiffre= points.toInt(&ok,10);
