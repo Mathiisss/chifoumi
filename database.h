@@ -5,6 +5,7 @@
 #define DATABASE_NAME "Max_bd"
 #define CONNECT_TYPE "QODBC"
 
+
 class database
 {
 public:

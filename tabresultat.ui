@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Résultat</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="RessourceChifoumi.qrc">
+    <normaloff>:/chifoumi/images/versus.gif</normaloff>:/chifoumi/images/versus.gif</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -53,7 +57,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="RessourceChifoumi.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>bQuitter</sender>

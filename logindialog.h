@@ -29,6 +29,8 @@ private:
     QString mdpBd;
     bool connexionOk;
     database *bd;
+    //mdp de la base: root
+    //identifiant de la base: root
 };
 
 #endif // LOGINDIALOG_H

@@ -18,14 +18,14 @@ ChifoumiDialog::~ChifoumiDialog()
 void ChifoumiDialog::Valider()
 {
     nom = ui->nomResul->text();
-    if(nom=="")
+    if(nom=="")// cas où le joueur n'a pas mit de nom
     {
         nom="Vous";
     }
     QString temps = ui->tempsResul->text();
     QString points = ui->pointsResul->text();
     bool ok;
-    if (points=="")
+    if (points=="")// cas où le joueur n'a pas mit de points
     {
         pointsChiffre=5;
     }
@@ -33,7 +33,7 @@ void ChifoumiDialog::Valider()
     {
         pointsChiffre= points.toInt(&ok,10);
     }
-    if (temps=="")
+    if (temps=="")// cas où le joueur n'a pas mit de temps
     {
         tempsChiffre=30;
     }

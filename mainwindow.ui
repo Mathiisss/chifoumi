@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Chifoumi</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="RessourceChifoumi.qrc">
+    <normaloff>:/chifoumi/images/pierre.gif</normaloff>:/chifoumi/images/pierre.gif</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_5">
     <item>
@@ -444,10 +448,16 @@
    <property name="text">
     <string>Parametres</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
   </action>
   <action name="actionResultats">
    <property name="text">
     <string>Resultats</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
    </property>
   </action>
  </widget>

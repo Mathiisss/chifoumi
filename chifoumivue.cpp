@@ -95,7 +95,7 @@ void chifoumiVue::jeu()
 {
     QString texteLabel;
     int score;
-    monJeu.setCoupMachine(monJeu.genererUnCoup());
+    monJeu.setCoupMachine(monJeu.genererUnCoup());// mettre un coup au hasard pour la machine
     switch (monJeu.getCoupMachine()) {
     case Chifoumi::pierre:
         ui->coupMachine->setPixmap(*pierre);
@@ -109,7 +109,7 @@ void chifoumiVue::jeu()
     default:
         break;
     }
-    if(monJeu.determinerGagnant()=='J')
+    if(monJeu.determinerGagnant()=='J') //cas où le joueur gagne
     {
         monJeu.majScores('J');
         score=monJeu.getScoreJoueur();
@@ -117,7 +117,7 @@ void chifoumiVue::jeu()
         ui->scoreJoueur->setText(texteLabel);
         ui->scoreJoueur->setFont(QFont("arial",18,100,false));
         ui->scoreJoueur->setAlignment(Qt::AlignCenter);
-        if(arretPointGagnant(monJeu.getScoreJoueur()))
+        if(arretPointGagnant(monJeu.getScoreJoueur()))//joueur atteind le nombre de points
         {
             timer->stop();
             QMessageBox *finPartieJoueur;
@@ -129,7 +129,7 @@ void chifoumiVue::jeu()
         }
 
     }
-    else if (monJeu.determinerGagnant()=='M')
+    else if (monJeu.determinerGagnant()=='M') //cas où la machine gagne
     {
         monJeu.majScores('M');
         score=monJeu.getScoreMachine();
@@ -138,7 +138,7 @@ void chifoumiVue::jeu()
         ui->scoreMachine->setFont(QFont("arial",18,100,false));
         ui->scoreMachine->setAlignment(Qt::AlignCenter);
 
-        if(arretPointGagnant(monJeu.getScoreMachine()))
+        if(arretPointGagnant(monJeu.getScoreMachine())) //machine atteind le nombre de points
         {
             timer->stop();
             QMessageBox *finPartieMachine;
@@ -177,13 +177,16 @@ void chifoumiVue::finDePartie()
 {
     QString texteLabel;
     loginBd.enregistrerDialog(chifoumiAff.getNom(),monJeu.getScoreJoueur(),monJeu.getScoreMachine(),(chifoumiAff.getTemps()-seconde));
+    //enregistrement de la partie
     ui->boutonCiseau->setEnabled(false);
     ui->boutonFeuille->setEnabled(false);
     ui->boutonPierre->setEnabled(false);
     ui->boutonNouvellePartie->setEnabled(true);
     ui->bouttonPause->setEnabled(false);
+    //desactivation des sae
     monJeu.initCoups();
     monJeu.initScores();
+
     texteLabel.setNum(monJeu.getScoreMachine());
     ui->scoreMachine->setText(texteLabel);
     ui->scoreMachine->setFont(QFont("arial",18,100,false));
@@ -201,6 +204,7 @@ void chifoumiVue::finDePartie()
     ui->labelGoal->setAlignment(Qt::AlignCenter);
     ui->labelGoal->setStyleSheet("color: #606060;");
     ui->actionParametres->setEnabled(true);
+    //reinistilisation de la partie
 
 }
 
@@ -216,7 +220,7 @@ void chifoumiVue::time()
         ui->Temps->setText("");
         ui->Temps->setFont(QFont("arial",8,100,false));
         ui->Temps->setAlignment(Qt::AlignCenter);
-        if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='J')
+        if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='J') //temps fini et joueur gagne
         {
             gagnant="Felicitation vous remportez la partie!!! Avec un score de ";
             gagnant.append(QString::number(monJeu.getScoreJoueur()));
@@ -225,7 +229,7 @@ void chifoumiVue::time()
             finPartie->exec();
             finDePartie();
         }
-        else if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='M')
+        else if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='M')//temps fini et machine gagne
         {
             gagnant="Dommage la Machine remporte la partie... La machine a un score de ";
             gagnant.append(QString::number(monJeu.getScoreMachine()));
@@ -234,7 +238,7 @@ void chifoumiVue::time()
             finPartie->exec();
             finDePartie();
         }
-        else if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='E')
+        else if(defGagnant(monJeu.getScoreJoueur(),monJeu.getScoreMachine())=='E')//temps fini et egalite
         {
             gagnant="Vous avez fait une égalité contre la machine. Avec un score de ";
             gagnant.append(QString::number(monJeu.getScoreJoueur()));
@@ -279,6 +283,7 @@ void chifoumiVue::mettrePause()
 
     if (enPause==true)
     {
+        //reactivation des bouttons
         ui->boutonCiseau->setEnabled(true);
         ui->boutonFeuille->setEnabled(true);
         ui->boutonPierre->setEnabled(true);
@@ -290,6 +295,7 @@ void chifoumiVue::mettrePause()
     else
     {
         timer->stop();
+        //desactivation des bouttons
         ui->boutonCiseau->setEnabled(false);
         ui->boutonFeuille->setEnabled(false);
         ui->boutonPierre->setEnabled(false);
@@ -302,7 +308,7 @@ void chifoumiVue::mettrePause()
 void chifoumiVue::afficherDialog()
 {
 
-    chifoumiAff.show();
+    chifoumiAff.show();//affichage du dialog de parametre
     chifoumiAff.exec();
 
     if(chifoumiAff.getNom()!="")
@@ -328,7 +334,7 @@ void chifoumiVue::affResul()
 {
     tab.remplirTable();
     tab.show();
-    tab.exec();
+    tab.exec();//affichage de la table de résultat
 
 }
 

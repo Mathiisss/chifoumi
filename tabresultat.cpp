@@ -22,7 +22,8 @@ void tabResultat::remplirTable()
     bd->openDataBase();
     QSqlQueryModel *model= new QSqlQueryModel;
 
-    model->setQuery("SELECT * FROM StockPartie");
+    model->setQuery("SELECT * FROM StockPartie ORDER BY scoreJoueur DESC LIMIT 10");
+    //affichage des 10 meilleurs partie
     ui->TableResul->setModel(model);
 }
 

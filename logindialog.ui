@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Login</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="RessourceChifoumi.qrc">
+    <normaloff>:/chifoumi/images/versus.gif</normaloff>:/chifoumi/images/versus.gif</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -134,7 +138,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="RessourceChifoumi.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>bOk</sender>

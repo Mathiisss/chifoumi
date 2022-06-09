@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Paramètres</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="RessourceChifoumi.qrc">
+    <normaloff>:/chifoumi/images/versus.gif</normaloff>:/chifoumi/images/versus.gif</iconset>
+  </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -45,7 +49,17 @@
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QLineEdit" name="tempsResul"/>
+       <widget class="QLineEdit" name="tempsResul">
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string/>
+        </property>
+       </widget>
       </item>
       <item row="2" column="1">
        <widget class="QLabel" name="label">
@@ -128,7 +142,9 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="RessourceChifoumi.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>ChifoumiDialog</sender>
