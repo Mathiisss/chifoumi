@@ -1,15 +1,19 @@
-#include "mainwindow.h"
+#include "chifoumivue.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QTimer>
+#include <chifoumidialog.h>
 
-MainWindow::MainWindow(QWidget *parent)
+
+
+chifoumiVue::chifoumiVue(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     timer = new QTimer(this);
     timer->setInterval(1000);
+    seconde = 30;
     connect(ui->boutonNouvellePartie,SIGNAL(clicked()),this,SLOT(Partie()));
     connect(ui->boutonPierre,SIGNAL(clicked()),this,SLOT(jouerLeCailloux()));
     connect(ui->boutonFeuille,SIGNAL(clicked()),this,SLOT(jouerLaFeuille()));
@@ -18,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionA_propos_de,SIGNAL(triggered()),this,SLOT(aPropos()));
     connect(timer,SIGNAL(timeout()),this,SLOT(time()));
     connect(ui->bouttonPause,SIGNAL(clicked()),this,SLOT(mettrePause()));
+    connect(ui->actionParametres,SIGNAL(triggered()),this,SLOT(afficherDialog()));
 
     pierre = new QPixmap(":/chifoumi/images/pierre.gif");
     ciseau = new QPixmap(":/chifoumi/images/ciseau.gif");
@@ -26,14 +31,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-MainWindow::~MainWindow()
+chifoumiVue::~chifoumiVue()
 {
     delete ui;
 }
 
 //SOUS PROGRAMMES
 
-void MainWindow::Partie()
+void chifoumiVue::Partie()
 {
     ui->scoreJoueur->setText("0");
     ui->scoreJoueur->setFont(QFont("arial",18,100,false));
@@ -45,34 +50,33 @@ void MainWindow::Partie()
     ui->boutonFeuille->setEnabled(true);
     ui->boutonPierre->setEnabled(true);
     ui->bouttonPause->setEnabled(true);
-    seconde = 30;
     timer->start();
     time();
 
 }
 
-void MainWindow::jouerLeCailloux(){
+void chifoumiVue::jouerLeCailloux(){
     monJeu.setCoupJoueur(Chifoumi::pierre);
     ui->coupJoueur->setPixmap(*pierre);
     jeu();
 
 }
 
-void MainWindow::jouerLaFeuille(){
+void chifoumiVue::jouerLaFeuille(){
     monJeu.setCoupJoueur(Chifoumi::papier);
     ui->coupJoueur->setPixmap(*feuille);
     jeu();
 }
 
-void MainWindow::jouerLeCiseau(){
+void chifoumiVue::jouerLeCiseau(){
     monJeu.setCoupJoueur(Chifoumi::ciseau);
     ui->coupJoueur->setPixmap(*ciseau);
     jeu();
 
 }
-bool MainWindow::arretPointGagnant(int point)
+bool chifoumiVue::arretPointGagnant(int point)
 {
-    if(point==5){
+    if(point==goal){
         return true;
     }
     else
@@ -83,7 +87,7 @@ bool MainWindow::arretPointGagnant(int point)
 
 
 
-void MainWindow::jeu()
+void chifoumiVue::jeu()
 {
     QString texteLabel;
     int score;
@@ -111,6 +115,7 @@ void MainWindow::jeu()
         ui->scoreJoueur->setAlignment(Qt::AlignCenter);
         if(arretPointGagnant(monJeu.getScoreJoueur()))
         {
+            timer->stop();
             QMessageBox *finPartieJoueur;
             finPartieJoueur = new QMessageBox;
             finPartieJoueur->setWindowTitle("Fin de Partie");
@@ -131,6 +136,7 @@ void MainWindow::jeu()
 
         if(arretPointGagnant(monJeu.getScoreMachine()))
         {
+            timer->stop();
             QMessageBox *finPartieMachine;
             finPartieMachine = new QMessageBox;
             finPartieMachine->setWindowTitle("Fin de Partie");
@@ -145,11 +151,11 @@ void MainWindow::jeu()
 
     }
 }
-void MainWindow::quitter()
+void chifoumiVue::quitter()
 {
     this->close();
 }
-void MainWindow::aPropos()
+void chifoumiVue::aPropos()
 {
     QMessageBox *box;
     box = new QMessageBox;
@@ -163,10 +169,10 @@ void MainWindow::aPropos()
 
 }
 
-void MainWindow::finDePartie()
+void chifoumiVue::finDePartie()
 {
     QString texteLabel;
-    timer->stop();
+
     ui->boutonCiseau->setEnabled(false);
     ui->boutonFeuille->setEnabled(false);
     ui->boutonPierre->setEnabled(false);
@@ -184,10 +190,16 @@ void MainWindow::finDePartie()
     ui->Temps->setText("Partie Terminé");
     ui->Temps->setFont(QFont("arial",8,100,false));
     ui->Temps->setAlignment(Qt::AlignCenter);
+    seconde=30;
+    goal = 5;
+    ui->labelGoal->setNum(goal);
+    ui->labelGoal->setFont(QFont("Times",12,40,false));
+    ui->labelGoal->setAlignment(Qt::AlignCenter);
+    ui->labelGoal->setStyleSheet("color: #606060;");
 
 }
 
-void MainWindow::time()
+void chifoumiVue::time()
 {
     QString valTemps;
     if (seconde==0)
@@ -241,7 +253,7 @@ void MainWindow::time()
 
 }
 
-char MainWindow::defGagnant(int scoreJoueur,int scoreMachine)
+char chifoumiVue::defGagnant(int scoreJoueur,int scoreMachine)
 {
     if(scoreJoueur>scoreMachine)
     {
@@ -257,7 +269,7 @@ char MainWindow::defGagnant(int scoreJoueur,int scoreMachine)
     }
 }
 
-void MainWindow::mettrePause()
+void chifoumiVue::mettrePause()
 {
 
     if (enPause==true)
@@ -279,6 +291,32 @@ void MainWindow::mettrePause()
         ui->boutonNouvellePartie->setEnabled(false);
         ui->bouttonPause->setText("Reprise Jeu");
         enPause=true;
+    }
+}
+
+void chifoumiVue::afficherDialog()
+{
+
+    chifoumiAff.show();
+    chifoumiAff.exec();
+
+    if(chifoumiAff.getNom()!="")
+    {
+        ui->Vous->setText(chifoumiAff.getNom());
+        ui->Vous->setFont(QFont("arial",18,100,false));
+        ui->Vous->setAlignment(Qt::AlignCenter);
+    }
+    if(chifoumiAff.getTemps()!=0)
+    {
+        seconde = chifoumiAff.getTemps();
+    }
+    if(chifoumiAff.getPoints()!=0)
+    {
+        goal = chifoumiAff.getPoints();
+        ui->labelGoal->setNum(goal);
+        ui->labelGoal->setFont(QFont("Times",12,40,false));
+        ui->labelGoal->setAlignment(Qt::AlignCenter);
+        ui->labelGoal->setStyleSheet("color: #606060;");
     }
 }
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1151</width>
-    <height>630</height>
+    <width>566</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,7 +51,7 @@
            </spacer>
           </item>
           <item row="2" column="2">
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="labelGoal">
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#aaaaaa;&quot;&gt;5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -397,7 +397,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1151</width>
+     <width>566</width>
      <height>21</height>
     </rect>
    </property>
@@ -406,6 +406,7 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionQuitter"/>
+    <addaction name="actionParametres"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -436,6 +437,11 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+  </action>
+  <action name="actionParametres">
+   <property name="text">
+    <string>Parametres</string>
    </property>
   </action>
  </widget>

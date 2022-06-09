@@ -10,14 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     chifoumi.cpp \
-    main.cpp \
-    mainwindow.cpp
+    chifoumidialog.cpp \
+    chifoumivue.cpp \
+    main.cpp
 
 HEADERS += \
     chifoumi.h \
-    mainwindow.h
+    chifoumidialog.h \
+    chifoumivue.h
 
 FORMS += \
+    chifoumidialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

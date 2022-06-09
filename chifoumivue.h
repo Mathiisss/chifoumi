@@ -4,18 +4,19 @@
 #include <QMainWindow>
 #include "QPixmap"
 #include "chifoumi.h"
+#include "chifoumidialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class chifoumiVue : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    chifoumiVue(QWidget *parent = nullptr);
+    ~chifoumiVue();
 private:
     QTimer  *timer;
     Chifoumi monJeu;
@@ -24,6 +25,8 @@ private:
     QPixmap *ciseau;
     int seconde;
     bool enPause = false;
+    int goal;
+    ChifoumiDialog chifoumiAff;
 public slots:
     void Partie();
     void jeu();
@@ -34,6 +37,7 @@ public slots:
     void aPropos();
     void time();
     void mettrePause();
+    void afficherDialog();
 public:
     bool arretPointGagnant(int);
     void finDePartie();
