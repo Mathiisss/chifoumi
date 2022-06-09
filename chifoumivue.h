@@ -6,6 +6,7 @@
 #include "chifoumi.h"
 #include "chifoumidialog.h"
 #include "logindialog.h"
+#include "tabresultat.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +31,7 @@ private:
     int goal;
     ChifoumiDialog chifoumiAff;
     loginDialog loginBd;
+    tabResultat tab;
 
 public slots:
     void Partie();
@@ -42,10 +44,12 @@ public slots:
     void time();
     void mettrePause();
     void afficherDialog();
+    void affResul();
 public:
     bool arretPointGagnant(int);
     void finDePartie();
     char defGagnant(int,int);
+
 
 
 

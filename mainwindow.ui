@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Chifoumi</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -407,6 +407,7 @@
     </property>
     <addaction name="actionQuitter"/>
     <addaction name="actionParametres"/>
+    <addaction name="actionResultats"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -442,6 +443,11 @@
   <action name="actionParametres">
    <property name="text">
     <string>Parametres</string>
+   </property>
+  </action>
+  <action name="actionResultats">
+   <property name="text">
+    <string>Resultats</string>
    </property>
   </action>
  </widget>

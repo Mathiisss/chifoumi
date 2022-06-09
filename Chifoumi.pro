@@ -14,19 +14,22 @@ SOURCES += \
     chifoumivue.cpp \
     database.cpp \
     logindialog.cpp \
-    main.cpp
+    main.cpp \
+    tabresultat.cpp
 
 HEADERS += \
     chifoumi.h \
     chifoumidialog.h \
     chifoumivue.h \
     database.h \
-    logindialog.h
+    logindialog.h \
+    tabresultat.h
 
 FORMS += \
     chifoumidialog.ui \
     logindialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    tabresultat.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

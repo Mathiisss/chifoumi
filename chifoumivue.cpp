@@ -24,6 +24,7 @@ chifoumiVue::chifoumiVue(QWidget *parent)
     connect(timer,SIGNAL(timeout()),this,SLOT(time()));
     connect(ui->bouttonPause,SIGNAL(clicked()),this,SLOT(mettrePause()));
     connect(ui->actionParametres,SIGNAL(triggered()),this,SLOT(afficherDialog()));
+    connect(ui->actionResultats,SIGNAL(triggered()),this,SLOT(affResul()));
 
     pierre = new QPixmap(":/chifoumi/images/pierre.gif");
     ciseau = new QPixmap(":/chifoumi/images/ciseau.gif");
@@ -52,6 +53,7 @@ void chifoumiVue::Partie()
     ui->boutonPierre->setEnabled(true);
     ui->bouttonPause->setEnabled(true);
     ui->actionParametres->setEnabled(false);
+    seconde = chifoumiAff.getTemps();
     timer->start();
     time();
 
@@ -162,8 +164,8 @@ void chifoumiVue::aPropos()
     QMessageBox *box;
     box = new QMessageBox;
     box->setWindowTitle("A propos du Chifoumi");
-    box->setInformativeText("CHIFOUMI v3 \n"
-                            "Date de création : 18/04/2022\n"
+    box->setInformativeText("CHIFOUMI v9 \n"
+                            "Date de création : 08/06/2022\n"
                             "Créateur: G.Arricastres, M.Lague, M.Segot");
     box->exec();
 
@@ -322,6 +324,12 @@ void chifoumiVue::afficherDialog()
         ui->labelGoal->setStyleSheet("color: #606060;");
     }
 }
+void chifoumiVue::affResul()
+{
+    tab.remplirTable();
+    tab.show();
+    tab.exec();
 
+}
 
 

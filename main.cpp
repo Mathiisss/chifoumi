@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
         if(win.Valider()==false)
         {
             ok=true;
-            qDebug()<<"AAAAAAAAAAAAAAA";
             w.setWindowTitle("Chifoumi");
             w.show();
         }
